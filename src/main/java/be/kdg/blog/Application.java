@@ -16,8 +16,8 @@ public class Application extends SpringApplication {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
-Blog blog = (Blog)context.getBean("respBody");
+//Blog blog = (Blog)context.getBean("respBody");
 
-blog.getEntries();
+//blog.getEntries();
     }
 }
