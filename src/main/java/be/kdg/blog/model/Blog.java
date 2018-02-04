@@ -23,6 +23,7 @@ public class Blog {
         this.addTestData();
     }
 
+    // test
     private void addTestData() {
         this.tags.add(new Tag(1, "lifestyle"));
         this.tags.add(new Tag(2, "entertainment"));
