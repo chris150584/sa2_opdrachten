@@ -7,10 +7,12 @@
 
 
 
-<bean id="blog" class="be.kdg.blog.model.Blog"/>
+<bean id="blog"
+      class="be.kdg.blog.model.Blog"/>
 
 <bean id ="respBody" class = "be.kdg.blog.controllers.ResponseBodyController">
         <constructor-arg ref = "blog"/>
+
 </bean>
 
 

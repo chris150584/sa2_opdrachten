@@ -3,16 +3,31 @@ package be.kdg.blog.controllers;
 import be.kdg.blog.model.Blog;
 import be.kdg.blog.model.BlogEntry;
 import be.kdg.blog.model.Tag;
+import com.google.gson.Gson;
+import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+/* ------------------------
+            DEEL1
+   -----------------------    */
 @Controller
-public class ResponseBodyController extends Blog {
+public class ResponseBodyController {
 
     private StringBuilder stringBuilder;
     private Blog blog;
+
+
+public ResponseBodyController(Blog blog){
+
+        this.blog = blog;}
 
 
 public ResponseBodyController(){}
@@ -33,9 +48,17 @@ public ResponseBodyController(){}
 
     @GetMapping(value ={"/blog"}, produces= MediaType.TEXT_HTML_VALUE)
     @ResponseBody
+
+
+/* ------------------------
+            DEEL2
+   -----------------------    */
+
     public String getBlogText(){
 
-   blog = new ResponseBodyController(blog);
+// Moet vervangen worden, maar voor resultaat te bekijken lukt dit
+blog = new Blog();
+
 
     stringBuilder = new StringBuilder();
     stringBuilder.append("<html><head><title>Hello!</title></head><body>");
@@ -55,23 +78,40 @@ public ResponseBodyController(){}
 
     }
 
-    // VERDER in te vullen
-    @GetMapping(value ="{/api/blog/entries/{entryId}}", produces= MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public String getJsonText(){
 
-    return "";
+    /* ------------------------
+            DEEL3
+   -----------------------    */
+
+    // VERDER in te vullen
+    @GetMapping(value = "/api/blog/entries/{entryId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getJsonText(@PathVariable int entryId)
+    {
+        blog = new Blog();
+
+
+   return new Gson().toJson(blog.getEntries().get(--entryId));
     }
 
 
-    // public ResponseBodyController(){
+/* EXTRA */
 
-   // }
+/*    @GetMapping(value = "/api/blog/entries/{entryId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getJsonPath(@RequestParam("?") int teken) {
+        blog = new Blog();
 
-    public ResponseBodyController(Blog blog){
+        try {
+            return new Gson().toJson(blog.getEntries().get(teken));
+        } catch (Exception ex) {
+            throw new RuntimeException();
+        }
+*/
+        // public ResponseBodyController(){
 
-        this.blog = blog;}
+        // }
 
 
+    }
 
-}
