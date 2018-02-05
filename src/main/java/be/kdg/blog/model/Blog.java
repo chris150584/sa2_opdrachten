@@ -1,5 +1,6 @@
 package be.kdg.blog.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,8 @@ public class Blog {
     private final List<BlogEntry> entries;
     private final List<Tag> tags;
 
+    // @autowired added
+    @Autowired
     public Blog() {
         this.entries = new ArrayList<>();
         this.tags = new ArrayList<>();

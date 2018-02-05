@@ -14,7 +14,7 @@ public class Application extends SpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+ //       ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
 //Blog blog = (Blog)context.getBean("respBody");
 

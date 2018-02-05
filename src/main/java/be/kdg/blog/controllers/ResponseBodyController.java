@@ -4,13 +4,11 @@ import be.kdg.blog.model.Blog;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ResponseBodyController {
-
+public ResponseBodyController(){}
     @GetMapping(value ={"/"}, produces= MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
     public String getClientText(){
@@ -18,7 +16,7 @@ public class ResponseBodyController {
         return "Hello, world !";
     }
 
-    @GetMapping(value ={"/html"}, produces= MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(value ={"/html"}, produces= MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String getHtmlText(){
 
