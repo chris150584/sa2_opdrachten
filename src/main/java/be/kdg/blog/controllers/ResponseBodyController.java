@@ -4,15 +4,9 @@ import be.kdg.blog.model.Blog;
 import be.kdg.blog.model.BlogEntry;
 import be.kdg.blog.model.Tag;
 import com.google.gson.Gson;
-import org.springframework.boot.context.config.ResourceNotFoundException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 
 /* ------------------------
             DEEL1
@@ -43,19 +37,15 @@ public ResponseBodyController(Blog blog){
         return "<html><head><title>Hello!</title></head><body><h1>Hello, world!</h1></body></html>";
     }
 
+
+    /* ------------------------
+                DEEL2
+       -----------------------    */
+
     @GetMapping(value ={"/blog"}, produces= MediaType.TEXT_HTML_VALUE)
     @ResponseBody
 
-
-/* ------------------------
-            DEEL2
-   -----------------------    */
-
     public String getBlogText(){
-
-// Moet vervangen worden, maar voor resultaat te bekijken lukt dit
-
-
 
     stringBuilder = new StringBuilder();
     stringBuilder.append("<html><head><title>Hello!</title></head><body>");
@@ -80,13 +70,17 @@ public ResponseBodyController(Blog blog){
             DEEL3
    -----------------------    */
 
-    // VERDER in te vullen
+
     @GetMapping(value = "/api/blog/entries/{entryId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getJsonText(@PathVariable int entryId)
     {
 
-   return new Gson().toJson(this.blog.getEntries().get(--entryId));
+   // geeft andere ID nl /api/blog/entries/2 geeft de entry met ID 3
+   // return new Gson().toJson(this.blog.getEntries().get(entryId));
+
+   // geeft de goeie ID nl /api/blog/entries/2 geeft de entry met ID 2
+       return new Gson().toJson(this.blog.getEntries().get(--entryId));
     }
 
 
