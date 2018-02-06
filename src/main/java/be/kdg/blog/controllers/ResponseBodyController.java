@@ -9,10 +9,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /* ------------------------
@@ -22,15 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ResponseBodyController {
 
     private StringBuilder stringBuilder;
-    private Blog blog;
+    private final Blog blog;
 
 
 public ResponseBodyController(Blog blog){
 
         this.blog = blog;}
 
-
-public ResponseBodyController(){}
 
     @GetMapping(value ={"/"}, produces= MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
@@ -57,7 +54,7 @@ public ResponseBodyController(){}
     public String getBlogText(){
 
 // Moet vervangen worden, maar voor resultaat te bekijken lukt dit
-blog = new Blog();
+
 
 
     stringBuilder = new StringBuilder();
@@ -88,32 +85,24 @@ blog = new Blog();
     @ResponseBody
     public String getJsonText(@PathVariable int entryId)
     {
-        blog = new Blog();
 
-
-   return new Gson().toJson(blog.getEntries().get(--entryId));
+   return new Gson().toJson(this.blog.getEntries().get(--entryId));
     }
 
 
 /* EXTRA */
 
-/*    @GetMapping(value = "/api/blog/entries/{entryId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public String getJsonPath(@RequestParam("?") int teken) {
-        blog = new Blog();
+  @RequestMapping(value = "/api/blog/entries")
+  @ResponseBody
+    public String getJsonPath(@RequestParam("id") int entryId) {
+
 
         try {
-            return new Gson().toJson(blog.getEntries().get(teken));
+            return new Gson().toJson(blog.getEntries().get(entryId));
         } catch (Exception ex) {
             throw new RuntimeException();
         }
 
-        // public ResponseBodyController(){
-
-        // }
-
-*/
-
-
+}
 }
 
