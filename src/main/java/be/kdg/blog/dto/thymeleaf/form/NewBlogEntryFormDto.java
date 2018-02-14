@@ -6,15 +6,15 @@ import java.util.List;
 
 public class NewBlogEntryFormDto {
     @NotNull
-    @Size(min = 3, message = "{size.subject}")
+    @Size(min = 3)
     private String subject;
 
     @NotNull
-    @Size(min = 3, message = "{size.message}")
+    @Size(min = 3)
     private String message;
 
     @NotNull
-    @Size(min = 1, message = "{size.tags}")
+    @Size(min = 1)
     private List<Long> tagIds;
 
     public NewBlogEntryFormDto() {
