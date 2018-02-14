@@ -8,7 +8,7 @@ Voorbereiding
 
 2. Indien je dit nog niet gedaan hebt, breng dan je _fork_
 synchroon met de originele repository. Het synchroniseren
-van een git fork wordt toegelicht in [dit filmpje](https://www.youtube.com).
+van een git fork wordt toegelicht in [dit filmpje](https://www.youtube.com/watch?v=E8Xmi6mxQ-c).
 Vergeet niet om je lokaal gemaakte aanpassingen eerst te committen
 en te pushen zodat je geen werk verliest in geval van
 problemen.
