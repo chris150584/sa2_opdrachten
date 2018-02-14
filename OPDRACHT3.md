@@ -138,6 +138,8 @@ Bestudeer volgende klassen:
 Om eenvoudig te starten passen we `HomeController` als
 eerste aan:
 * GET op `/`
+    * Voeg een `final` `DtoMapper` attribuut toe aan de controller
+    en initialiseer het via _constructor injection_.
     * De `List` van `BlogEntry` objecten die we in het model
     stoppen moet een `List` worden van `BlogEntryDto` objecten.  
     Gebruik de methode `DtoMapper::convertBlogEntriesToDto` om
@@ -148,6 +150,8 @@ eerste aan:
 
 Pas `NewEntryController` aan:
 * GET op `/new_entry`
+    * Voeg een `final` `DtoMapper` attribuut toe aan de controller
+    en initialiseer het via _constructor injection_.
     * In het model stoppen we een object van het type `NewBlogEntryFormDto`
     en een `List` van `TagDto` objecten (`DtoMapper::convertTagsToDto`).
 * POST op `/new_entry`
