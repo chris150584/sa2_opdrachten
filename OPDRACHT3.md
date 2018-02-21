@@ -191,6 +191,9 @@ Probeer ook dit even uit met je browser.
 
 Deel 4
 --
+* Voeg de `@Valid` annotatie toe aan de `NewBlogEntryFormDto` parameter van
+je POST methode in `NewEntryController`.
+
 Probeer eens een _Subject_ of een _Message_ in te geven van minder
 dan 3 karakters. Je zal zien dat dit niet lukt. Dit komt door
 de `@NotNull` en `@Size` annotaties die je kan terugvinden in de klasse 
