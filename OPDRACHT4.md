@@ -1,6 +1,6 @@
 #Opdracht 4
 ##Voorbereiding
-* Doorloop volgende officiele Spring guide:
+* Doorloop volgende officiële Spring guide:
     * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)  
       Om het geheel te testen kan je ook een kleine controller maken
       in plaats van te werken met de `CommandLineRunner`.  
@@ -55,8 +55,8 @@ d) Controllers
   onze versie van Hibernate)
   * Voeg bij het `tags` attribuut volgende annoties toe.  
   De veel-op-veel relatie tussen entry en tag wordt
-  achter de schermen geimplementeerd d.m.v. de
-  tussentabel `blog_entry_tag`. We zullen verder **niet**
+  geïmplementeerd d.m.v. de
+  tussentabel `blog_entry_tag`. We zullen **niet**
   in aanraking komen met deze tabel, alles gebeurt achter de
   schermen.
 ```
@@ -141,17 +141,60 @@ spring.h2.console.path=/h2-console
 * Je past je `given` statement aan zodat je je service methode
 _stubt_ i.p.v. de vroegere `Blog::getEntries`
 ###NewEntryControllerTests
+(Deze test is voor de POST methode van opdracht 3)
+
 * Maak een nieuwe klasse `be.kdg.blog.tests.mvc.NewEntryControllerTests`
-* Je _mockt_ zowel `BlogEntryService` als `TagService`.
+* Je _mockt_ `BlogEntryService`.
 * Maak een `@Test` methode genaamd `testAddBlogPage`:
-  * TODO
+  * Je doet een **POST** MVC request naar `/new_entry` waarbij je enkel HTML
+  accepteert en waarbij je drie parameters verstuurt: een _subject_,
+  een _message_
+  en een lijst van tag IDs (deze laatste kan je doorgeven als een
+  array van `String`s). Gebruik de `param` methode om parameters
+  door te geven.
+    * Je verwacht status code 3XX (redirection)
+    * Je verwacht _redirected URL_ `/`
+  * Vervolgens verifieer je dat de `save` methode van je service
+  één maal aangeroepen werd en je vangt beide argumenten van deze
+  aanroep op.  
+  [Hier](http://www.baeldung.com/mockito-verify) kan je enkele
+  voorbeelden terugvinden. Kijk zeker naar het laatste voorbeeld
+  "verify interaction using argument capture". Op lijn 4
+  verifieert men of de `addAll` methode aangeroepen werd op
+  het `mockedList` object en vangt men tegelijk het argument op
+  dat van het type `List` is.
+    * Je kijkt na of de _subject_ en de _message_ van het opgevangen
+    eerste argument gelijk is aan de _subject_ en de _message_ die
+    je had doorgestuurd met je MVC request. (Tip: `assertThat`)
+    * Je kijkt na of de tag IDs van het opgevangen tweede
+    argument gelijk zijn aan de tag IDs die
+    je had doorgestuurd met je MVC request.
+
 ###BlogEntryServiceTests
 * Maak een nieuwe klasse `be.kdg.blog.tests.services.BlogEntryServiceTests`
 * Je _mockt_ zowel `BlogEntryRepository` als `TagRepository`.
 * Dit is **geen** MVC test. We gaan de `BlogEntryService` klasse
 testen en hebben dus een referentie nodig naar een object van
 deze klasse. Maak een attribuut aan van het type `BlogEntryService`
-dat je initialiseert met __*attribute dependency injection*__
+dat je initialiseert met [Field-Based Dependency Injection](http://www.baeldung.com/inversion-control-and-dependency-injection-in-spring)
 (in de context van een test is dat best OK).
 * Maak een `@Test` methode genaamd `testSaveBlogEntry`:
-  * TODO
+  * Met behulp van `given` stub je de methode `findAll` van het gemockte
+  `TagRepository` object. Je hebt enkele dummy `Tag` objecten nodig die
+  door deze `findAll` zouden moeten teruggegeven worden.
+  * Doe nu een klassieke methode-aanroep naar de te testen `save` methode,
+  bijvoorbeeld:
+  ```
+  this.blogEntryService.save(entry, tagIds);
+  ```
+  * Verifieer of de `save` methode van je `BlogEntryRepository` object
+  één maal aangeroepen werd en vang het argument van deze aanroep op.
+  Dit argument is van het type `BlogEntry`.
+  * Je geeft het opgevangen argument een grondige doorlichting met behulp van
+  bijvoorbeeld `assertThat` en `assertTrue`:
+    * Is het _subject_ gelijk aan het _subject_ dat je gebruikte bij de
+    klassieke methode-aanroep?
+    * Is de _message_ gelijk aan de _message_ die je gebruikte?
+    * Is het aantal tags gelijk aan het aantal tags dat je gebruikte?
+    * Zijn de IDs van de tags gelijk aan de IDs die je gebruikte?
+
