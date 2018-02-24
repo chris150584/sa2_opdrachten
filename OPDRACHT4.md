@@ -1,5 +1,7 @@
-#Opdracht 4
-##Voorbereiding
+Opdracht 4
+==
+Voorbereiding
+--
 * Doorloop volgende officiële Spring guide:
     * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)  
       Om het geheel te testen kan je ook een kleine controller maken
@@ -9,7 +11,8 @@
 * Lees hoofdstuk 11 van het boek (de _setup_/configuratie van
 _entity-managers_, _datasources_, enz. mag je overslaan)
 
-##Deel 1
+Deel 1
+--
 We gaan onze gegevens persisteren door ze op te slaan
 in een relationele databank. Om vlot te kunnen
 ontwikkelen kiezen we voor een H2 databank die **bij
@@ -30,7 +33,7 @@ b) Repositories
 c) Services  
 d) Controllers
 
-###a) Entiteiten
+**a) Entiteiten**  
 * Verwijder de klasse `Blog`. (De gegevens zullen we
   vanaf nu ophalen uit een tabel.)  
   Verwijder ook `ResponseBodyController` en `ResponseBodyControllerTests`.
@@ -73,7 +76,7 @@ d) Controllers
   annotaties toe.
   * Voeg bij `name` `@Column(nullable = false)` toe.
 
-###b) Repositories
+**b) Repositories**  
 * Maak een nieuwe package aan genaamd `be.kdg.blog.persistence`.
 In deze package maak je twee interfaces aan:
   * `BlogEntryRepository`: een interface die een uitbreiding is
@@ -81,7 +84,7 @@ In deze package maak je twee interfaces aan:
   en als `ID` neem je het (wrapper-)type van de ID van deze entiteit.
   * Idem voor `TagRepository`
 
-###c) Services
+**c) Services**  
 * Maak een nieuwe package aan genaamd `be.kdg.blog.services`.
 In deze package maak je twee klassen aan:
   * `BlogEntryService`: een "gewone" klasse die je annoteert met
@@ -105,7 +108,7 @@ In deze package maak je twee klassen aan:
     * Je hebt enkel een attribuut nodig voor de `TagRepository`.
     * Maak ook een `findAll` methode (zoals bij `BlogEntryService`).
 
-###d)Controllers
+**d)Controllers**  
 * Neem `NewEntryController` en `HomeController` onder handen.
 Je vervangt referenties naar `Blog` door referenties naar de
 nodige **services**.  
@@ -113,7 +116,7 @@ nodige **services**.
 praten, enkel met je services. (Controller --> Service --> Repository)  
 Maak gebruik van dependency injection (zoals eerder met `Blog`).
 
-###Configuratie
+**Configuratie**  
 Voeg het volgende toe in `application.properties`.
 Via deze configuratie geven we aan dat we een embedded
 (in memory) H2 databank gebruiken die geïnitialiseerd
@@ -135,12 +138,14 @@ spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
 ```
 
-##Deel 2
-###Aanpassing HomeControllerTests
+Deel 2
+--
+**Aanpassing HomeControllerTests**  
 * Het `@MockBean` pas je aan van `Blog` naar `BlogEntryService`.
 * Je past je `given` statement aan zodat je je service methode
 _stubt_ i.p.v. de vroegere `Blog::getEntries`
-###NewEntryControllerTests
+
+**NewEntryControllerTests**  
 (Deze test is voor de POST methode van opdracht 3)
 
 * Maak een nieuwe klasse `be.kdg.blog.tests.mvc.NewEntryControllerTests`
@@ -170,7 +175,7 @@ _stubt_ i.p.v. de vroegere `Blog::getEntries`
     argument gelijk zijn aan de tag IDs die
     je had doorgestuurd met je MVC request.
 
-###BlogEntryServiceTests
+**BlogEntryServiceTests**  
 * Maak een nieuwe klasse `be.kdg.blog.tests.services.BlogEntryServiceTests`
 * Je _mockt_ zowel `BlogEntryRepository` als `TagRepository`.
 * Dit is **geen** MVC test. We gaan de `BlogEntryService` klasse
