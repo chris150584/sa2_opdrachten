@@ -56,6 +56,12 @@ d) Controllers
   * Verander het type van `dateTime` naar `java.sql.Timestamp`.
   (De Java 8 date/time API is nog niet ondersteund in
   onze versie van Hibernate)
+    * Om `BlogEntry` te mappen naar `BlogEntryDto` moet je nog een
+    kleine manuele ingreep doen. Modelmapper gaat
+    namelijk niet uit zichzelf de vertaling doen van
+    `Timestamp` naar `LocalDateTime`: in `DtoMapper::convertToDto(BlogEntry)`
+    moet je _voor_ de sortering gebeurt het date/time veld
+    mappen: `result.setDateTime(blogEntry.getDateTime().toLocalDateTime());`.
   * Voeg bij het `tags` attribuut volgende annoties toe.  
   De veel-op-veel relatie tussen entry en tag wordt
   geïmplementeerd d.m.v. de
