@@ -60,7 +60,7 @@ d) Controllers
     kleine manuele ingreep doen. Modelmapper gaat
     namelijk niet uit zichzelf de vertaling doen van
     `Timestamp` naar `LocalDateTime`: in `DtoMapper::convertToDto(BlogEntry)`
-    moet je _voor_ de sortering gebeurt het date/time veld
+    moet je het date/time veld zelf
     mappen: `result.setDateTime(blogEntry.getDateTime().toLocalDateTime());`.
   * Voeg bij het `tags` attribuut volgende annoties toe.  
   De veel-op-veel relatie tussen entry en tag wordt
