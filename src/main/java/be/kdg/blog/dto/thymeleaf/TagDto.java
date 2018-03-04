@@ -1,15 +1,10 @@
-package be.kdg.blog.model;
+package be.kdg.blog.dto.thymeleaf;
 
-public class Tag {
+public class TagDto implements Comparable<TagDto> {
     private long id;
     private String name;
 
-    public Tag() {
-    }
-
-    public Tag(long id, String name) {
-        this.id = id;
-        this.name = name;
+    public TagDto() {
     }
 
     public long getId() {
@@ -26,5 +21,10 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int compareTo(TagDto o) {
+        return this.name.compareTo(o.name);
     }
 }
